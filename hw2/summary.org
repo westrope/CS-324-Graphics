@@ -1,0 +1,32 @@
+#+TITLE:     Homework 2
+#+AUTHOR:    Ian Westrope
+#+EMAIL:     west2737@vandals.uidaho.edu
+#+DATE:      2014-02-14 Fri
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+
+* 1 Memo
+In this assignment I was asked to build a basic API in Java to do simple 2D
+graphics.
+
+Building the API was relativly simple once I understood what a frame, viewport, and window
+were. And how those three things worked together.
+
+After building the API graphing the equations was fairly straight forward. Some parts were very
+tedius because I had to draw a lot of the lines on my own. The functions themselves were easy to 
+draw because you could use a loop to draw them.
+
+* 2 Programming Log
+1. 2/12/14: Spent about an hour figuring out how the frame, viewport, and window work.
+2. 2/13/14: Built the API in a few hours. Had to create the equations to move between window, viewport, and frame coordinates. Ended up making window it's own class since there will be multiple instances of a window. Also made a point class so I could easly pass points between functions.
+3. 2/14/14: Spent 3 hours graphing the functions. First major problem I encountered was making sure the function stayed inside of it's window. Had to change the WindowToViewport function to check the bounds of the window points. The next problem I had was the polynomial function was even with the bound checking it was drawing outside of its window. Found that the function was creating immaginary numbers which gave Java a NaN or Not a Number. Added a step to check for NaN and skip over it. 
