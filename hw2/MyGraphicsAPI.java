@@ -62,8 +62,14 @@ public class MyGraphicsAPI extends JComponent
 	return w;
     }
 
-    public static Point ViewPortToFrameWindow(Point p)
+    public static Point ViewPortToFrameWindow(Window w, Point p)
     {
+	// bound checking
+	if ( p.x > w.vpmaxx ) p.x = w.vpmaxx;
+	if ( p.x < w.vpminx ) p.x = w.vpminx;
+	if ( p.y > w.vpmaxy ) p.y = w.vpmaxy;
+	if ( p.y < w.vpminy ) p.y = w.vpminy;
+
 	Point p2 = new Point();
 	p2.x = framewidth * (( p.x - viewportminx ) / ( viewportmaxx - viewportminx ));
 	p2.y = frameheight * (( -(p.y) - viewportminy ) / ( viewportmaxy - viewportminy ));
@@ -72,6 +78,12 @@ public class MyGraphicsAPI extends JComponent
 
     public static Point WindowToViewport(Window w, double xwin, double ywin)
     {
+	// bound checking
+	if ( xwin > w.windowmaxx ) xwin = w.windowmaxx;
+	if ( xwin < w.windowminx ) xwin = w.windowminx;
+	if ( ywin > w.windowmaxy ) ywin = w.windowmaxy;
+	if ( ywin < w.windowminy ) ywin = w.windowminy;
+
 	Point p = new Point();
 	p.x = ((( xwin - w.windowminx ) / ( w.windowmaxx - w.windowminx )) * (w.vpmaxx - w.vpminx)) + w.vpminx;
 	p.y = ((( ywin - w.windowminy ) / ( w.windowmaxy - w.windowminy )) * ( w.vpmaxy - w.vpminy)) + w.vpminy;
