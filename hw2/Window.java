@@ -7,8 +7,12 @@
 
 public class Window
 {
-    float windowminx;
-    float windowminy;
-    float windowmaxx;
-    float windowmaxy;
+    double vpminx;
+    double vpminy;
+    double vpmaxx;
+    double vpmaxy;
+    double windowminx;
+    double windowminy;
+    double windowmaxx;
+    double windowmaxy;
 }

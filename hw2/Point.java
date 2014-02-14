@@ -7,6 +7,6 @@
 
 public class Point
 {
-    float x;
-    float y;
+    double x;
+    double y;
 }

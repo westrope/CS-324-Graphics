@@ -9,17 +9,17 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import 
+
 public class MyGraphicsAPI extends JComponent 
 {
     static int framewidth = 500;
     static int frameheight = 500;
-    static float viewportminy;
-    static float viewportminx;
-    static float viewportmaxx;
-    static float viewportmaxy;
-    static float x;
-    static float y;
+    static double viewportminy;
+    static double viewportminx;
+    static double viewportmaxx;
+    static double viewportmaxy;
+    static double x;
+    static double y;
 
     public static void InitGraphics()
     {
@@ -33,14 +33,14 @@ public class MyGraphicsAPI extends JComponent
         );
 
 	f.setSize( framewidth, frameheight );
-	f.setVisible( true );
 	f.getContentPane().add( new MyGraphicsAPI() );
+	f.setVisible( true );
 
 	SetViewport( -1 , -1, 1, 1 );
 
     }
 
-    public static void SetViewport( float width1, float height1, float width2, float height2  )
+    public static void SetViewport( double width1, double height1, double width2, double height2  )
     {
 	viewportminx = width1;
 	viewportminy = height1;
@@ -48,41 +48,34 @@ public class MyGraphicsAPI extends JComponent
 	viewportmaxy = height2;
     }
 
-    public static window SetWindow( float width1, float height1, float width2, float height2)
+    public static Window SetWindow( double width1, double height1, double width2, double height2, double vpminx, double vpminy, double vpmaxx, double vpmaxy)
     {
-	window w = new window();
-	this.w.windowminy = height1;
-	this.w.windowminx = width1;
-	this.w.windowmaxy = height2;
-	this.w.windowmaxx = width2;
+	Window w = new Window();
+	w.vpminx = vpminx;
+	w.vpminy = vpminy;
+	w.vpmaxx = vpmaxx;
+	w.vpmaxy = vpmaxy;
+	w.windowminy = height1;
+	w.windowminx = width1;
+	w.windowmaxy = height2;
+	w.windowmaxx = width2;
 	return w;
     }
 
-    public static point ViewPortToFrameWindow(float xv, float yv)
+    public static Point ViewPortToFrameWindow(Point p)
     {
-	point p = new point();
-	p.x = framewidth * (( xv - viewportminx ) / ( viewportmaxx - viewportminx ));
-	p.y = frameheight * (( -yv - viewportminy ) / ( viewportmaxy - viewportminy ));
+	Point p2 = new Point();
+	p2.x = framewidth * (( p.x - viewportminx ) / ( viewportmaxx - viewportminx ));
+	p2.y = frameheight * (( -(p.y) - viewportminy ) / ( viewportmaxy - viewportminy ));
+	return p2;
+    }
+
+    public static Point WindowToViewport(Window w, double xwin, double ywin)
+    {
+	Point p = new Point();
+	p.x = ((( xwin - w.windowminx ) / ( w.windowmaxx - w.windowminx )) * (w.vpmaxx - w.vpminx)) + w.vpminx;
+	p.y = ((( ywin - w.windowminy ) / ( w.windowmaxy - w.windowminy )) * ( w.vpmaxy - w.vpminy)) + w.vpminy;
 	return p;
     }
 
-    public static point WindowToViewport(window w, float xwin, float ywin)
-    {
-	point p = new point();
-	p.x = ((( xwin - w.windowminx ) / ( w.windowmaxx - w.windowminx )) * (viewportmaxx - viewportminx)) + viewportminx;
-	p.y = ((( ywin - w.windowminy ) / ( w.windowmaxy - w.windowminy )) * ( viewportmaxy - viewportminy)) + viewportminy;
-	return p;
-    }
-
-    public static void MoveTo2D(point p)
-    {
-	x = p.x;
-	y = p.y;
-    }
-
-    public static void DrawTo2D(point p, Graphics g)
-    {
-	g.drawLine(x, y, p.x, p.y);
-	MoveTo2D(p);
-    }
 }
